@@ -29,7 +29,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> searchMovies(String text, String rating) {
-        if (text != null && !rating.isEmpty()) {
+        if (text != null && rating !=null && !rating.isEmpty()) {
             double parsedRating = Double.parseDouble(rating);
             return movieRepository.searchMoviesByTextAndRating(text, parsedRating);
         }
@@ -38,7 +38,7 @@ public class MovieServiceImpl implements MovieService {
             return movieRepository.searchMovies(text);
         }
 
-        if (!rating.isEmpty()) {
+        if (rating !=null && !rating.isEmpty()) {
             double parsedRating = Double.parseDouble(rating);
             return movieRepository.searchMoviesByRating(parsedRating);
         }
