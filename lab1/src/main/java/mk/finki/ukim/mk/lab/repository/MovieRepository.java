@@ -1,4 +1,4 @@
-package mk.finki.ukim.mk.lab.model.repository;
+package mk.finki.ukim.mk.lab.repository;
 
 import mk.finki.ukim.mk.lab.model.Movie;
 import org.springframework.stereotype.Repository;
@@ -26,14 +26,31 @@ public class MovieRepository {
         movieList.add(new Movie("Movie 10", "Summary 10", 7.3));
     }
 
-    public List<Movie> findAll(){
+    public List<Movie> findAll() {
         return movieList;
     }
 
-    public List<Movie> searchMovies(String text){
+    public List<Movie> searchMovies(String text) {
+        String searchLower = text.toLowerCase();
         return movieList
                 .stream()
-                .filter(x->x.getTitle().contains(text) || x.getSummary().contains(text))
+                .filter(x -> x.getTitle().toLowerCase().contains(searchLower) || x.getSummary().toLowerCase().contains(searchLower))
+                .collect(Collectors.toList());
+    }
+
+    public List<Movie> searchMoviesByRating(double rating) {
+        return movieList
+                .stream()
+                .filter(movie -> movie.getRating() >= rating)
+                .collect(Collectors.toList());
+    }
+
+    public List<Movie> searchMoviesByTextAndRating(String text, double rating) {
+        String searchLower = text.toLowerCase();
+        return movieList
+                .stream()
+                .filter(movie -> movie.getTitle().toLowerCase().contains(searchLower) || movie.getSummary().toLowerCase().contains(searchLower))
+                .filter(movie -> movie.getRating() >= rating)
                 .collect(Collectors.toList());
     }
 }

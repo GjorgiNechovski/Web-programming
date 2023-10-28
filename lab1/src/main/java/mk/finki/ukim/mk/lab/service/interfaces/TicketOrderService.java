@@ -1,4 +1,4 @@
-package mk.finki.ukim.mk.lab.service;
+package mk.finki.ukim.mk.lab.service.interfaces;
 
 import mk.finki.ukim.mk.lab.model.TicketOrder;
 

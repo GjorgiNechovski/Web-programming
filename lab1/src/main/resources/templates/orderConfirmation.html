@@ -1,10 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="utf-8">
+    <title>Ordered Ticket - Confirmation</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+        table {
+            width:100%;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding: 3px 2px;
+        }
+    </style>
 </head>
 <body>
-$END$
+<section>
+    <header>
+        <h1>Movie Order page - Order confirmation </h1>
+    </header>
+    <table>
+        <tr>
+            <th colspan="2">
+                Your Order Status
+            </th>
+        </tr>
+        <tr>
+            <td><b>Client Name </b></td>
+            <td th:text="${clientName}"></td>
+        </tr>
+        <tr>
+            <td><b>Client IP Address</b></td>
+            <td th:text="${address}"></td>
+        </tr>
+        <tr>
+            <td><b>Ticket for Movie</b></td>
+            <td th:text="${movie}"></td>
+        </tr>
+        <tr>
+            <td><b>Number of tickets</b></td>
+            <td th:text="${tickets}"></td>
+        </tr>
+    </table>
+</section>
 </body>
 </html>
