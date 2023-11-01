@@ -10,7 +10,7 @@ import java.util.List;
 public class TickerOrderRepository {
     List<TicketOrder> orders;
 
-    public TicketOrder order(String movieName, String clientName, String address, Long tickets){
+    public TicketOrder order(String movieName, String clientName, String address, int tickets){
         if(orders == null){
             orders = new ArrayList<>();
         }
@@ -19,5 +19,9 @@ public class TickerOrderRepository {
         orders.add(order);
 
         return order;
+    }
+
+    public List<TicketOrder> getAllTickets(){
+         return orders;
     }
 }

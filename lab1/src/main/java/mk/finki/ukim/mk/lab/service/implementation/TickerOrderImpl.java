@@ -17,6 +17,14 @@ public class TickerOrderImpl implements TicketOrderService {
 
     @Override
     public TicketOrder placeOrder(String movieTitle, String clientName, String address, int numberOfTickets) {
-        return tickerOrderRepository.order(movieTitle, clientName, address, (long) numberOfTickets);
+        return tickerOrderRepository.order(movieTitle, clientName, address, numberOfTickets);
+    }
+
+    public long getClientsNumberOfTickets(String clientName){
+         return tickerOrderRepository.getAllTickets()
+                .stream()
+                .filter(ticketOrder -> ticketOrder.getClientName().equals(clientName))
+                .mapToInt(TicketOrder::getNumberOfTickets)
+                 .sum();
     }
 }

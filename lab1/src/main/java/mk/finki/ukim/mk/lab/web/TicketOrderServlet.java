@@ -42,7 +42,11 @@ public class TicketOrderServlet extends HttpServlet {
         webContext.setVariable("address", address);
         webContext.setVariable("clientName", clientName);
 
+
         tickerOrder.placeOrder(movieName, clientName, address, numberOfTickets);
+        long totalTickets = tickerOrder.getClientsNumberOfTickets(clientName);
+        webContext.setVariable("totalTickets", totalTickets);
+
 
         springTemplateEngine.process("orderConfirmation.html", webContext, resp.getWriter());
     }

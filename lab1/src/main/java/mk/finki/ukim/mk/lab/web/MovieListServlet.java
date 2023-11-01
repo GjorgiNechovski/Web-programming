@@ -1,6 +1,5 @@
 package mk.finki.ukim.mk.lab.web;
 
-import jakarta.servlet.ServletException;
 import mk.finki.ukim.mk.lab.model.Movie;
 import mk.finki.ukim.mk.lab.service.implementation.MovieServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
