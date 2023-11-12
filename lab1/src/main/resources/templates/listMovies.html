@@ -1,6 +1,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Movie Ticket Order page - Welcome and choose a Movie</title>
     <style type="text/css">
         body {
@@ -8,12 +10,16 @@
             margin: auto;
         }
     </style>
+
 </head>
 <body>
 <header>
     <h1>Welcome to our Movie Ticket Shop App</h1>
 </header>
 <main>
+
+    <h1 class="text-danger" th:if="${error!=null}" th:text="${error}"></h1>
+
     <form th:method="get" th:action="@{/}">
         <p>Filter movies by name</p>
         <input type="text" name="text"><br>
@@ -22,7 +28,7 @@
 
         <input type="submit" value="Filter movies">
     </form>
-    <form th:action="@{/ticketOrder}" th:method="post">
+    <form th:action="@{/ticketOrder}" th:method="post" id="ticket">
         <div>
             <h2>Insert your Name</h2>
             <input type="text" name="clientName" id="clientName" required>
@@ -32,14 +38,34 @@
 
         <div th:each="movie : ${movies}">
             <input type="radio" th:value="${movie.getTitle()}" name="movie" id="movie"
-                   th:text="'Title: ' + ${movie.getTitle()} + ', Summary: ' + ${movie.getSummary()} + ', Rating: ' + ${movie.getRating()}" required>
+                   th:text="'Title: ' + ${movie.getTitle()} +
+                           ', Summary: ' + ${movie.getSummary()} +
+                           ', Rating: ' + ${movie.getRating()} +
+                           ', Production: ' + ${movie.getProduction().getName()}" required><br>
+
+            <a class="btn btn-primary" th:href="@{/movie/edit/{id}(id=${movie.getId()})}">Edit Movie</a>
+
+            <button class="btn btn-danger" name="Delete Movie" th:attr="onclick='deleteMovie(\'' + ${movie.getId()} + '\')'">Delete Movie</button>
+
         </div>
 
         <h2>Choose number of tickets:</h2>
         <input type="number" name="numTickets" min="1" max="10"><br/>
         <br/>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" form="ticket">
     </form>
+
 </main>
 </body>
 </html>
+
+<script>
+    function deleteMovie(id){
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", '/movie/delete/' + id, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send();
+        window.location.href = '/movies';
+
+    }
+</script>

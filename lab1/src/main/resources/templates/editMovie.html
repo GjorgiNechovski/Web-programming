@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Movie</title>
+</head>
+<body>
+    <h2 th:text="'Editing ' + ${movie.getTitle()}"></h2>
+
+    <form th:action="@{/movie/edit/{id}(id=${movie.getId()})}" th:method="post">
+        <p>Enter the name of the movie: </p>
+        <input type="text" name="title" id="title" th:value="${movie.getTitle()}">
+
+        <p>Enter the new summary of the movie: </p>
+        <input type="text" name="summary" id="summary" th:value="${movie.getSummary()}">
+
+        <p>Enter the new rating of the movie: </p>
+        <input type="number" name="rating" id="rating" th:value="${movie.getRating()}">
+
+        <p>Select new Movie Production: </p>
+        <select name="production">
+            <option th:if="${movie} != null"
+                    th:selected="${movie.getProduction() != null &&
+                                movie.getProduction().getId() == prod.getId()}"
+                    th:each="prod : ${productions}"
+                    th:value="${prod.getId()}"
+                    th:text="${prod.getName()}">
+            </option>
+            <option th:if="${movie} == null"
+                    th:each="prod : ${productions}"
+                    th:value="${prod.getId()}"
+                    th:text="${prod.getName()}">
+            </option>
+
+        </select>
+
+        <input type="submit" value="Edit Movie">
+    </form>
+</body>
+</html>
