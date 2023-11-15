@@ -72,6 +72,13 @@ public class MovieController {
         return "redirect:/movies";
     }
 
+    @GetMapping("/movie/delete/{movieId}")
+    public String deleteMovieGet(@PathVariable long movieId){
+        movieService.deleteMovie(movieId);
+
+        return "redirect:/movies";
+    }
+
     @GetMapping("movie/add")
     public String getAddMoviePage(Model model){
         List<Production> productions = productionService.findAll();

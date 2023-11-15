@@ -9,6 +9,7 @@ import mk.finki.ukim.mk.lab.service.interfaces.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Service
@@ -64,9 +65,12 @@ public class MovieServiceImpl implements MovieService {
             throw new MovieNotFound();
         }
 
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        float formattedRating = Float.parseFloat(decimalFormat.format(rating));
+
         movie.setTitle(title);
         movie.setSummary(summary);
-        movie.setRating(rating);
+        movie.setRating(formattedRating);
         movie.setProduction(production);
 
         movieRepository.set(movie);

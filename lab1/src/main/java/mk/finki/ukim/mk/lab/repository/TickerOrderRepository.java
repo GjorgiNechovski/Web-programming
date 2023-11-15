@@ -15,7 +15,7 @@ public class TickerOrderRepository {
             orders = new ArrayList<>();
         }
 
-        TicketOrder order = new TicketOrder(movieName, clientName, address, tickets);
+        TicketOrder order = new TicketOrder(orders.size() + 1, movieName, clientName, address, tickets);
         orders.add(order);
 
         return order;
@@ -23,5 +23,9 @@ public class TickerOrderRepository {
 
     public List<TicketOrder> getAllTickets(){
          return orders;
+    }
+
+    public void delete(long id){
+        orders.removeIf(ticketOrder -> ticketOrder.getId() == id);
     }
 }

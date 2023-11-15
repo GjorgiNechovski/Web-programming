@@ -28,6 +28,10 @@
 
         <input type="submit" value="Filter movies">
     </form>
+
+    <a class="btn btn-primary" href="movie/add">Add new movie</a>
+    <a class="btn btn-primary" href="/allTickets">See all current tickets</a>
+
     <form th:action="@{/ticketOrder}" th:method="post" id="ticket">
         <div>
             <h2>Insert your Name</h2>
@@ -40,12 +44,14 @@
             <input type="radio" th:value="${movie.getTitle()}" name="movie" id="movie"
                    th:text="'Title: ' + ${movie.getTitle()} +
                            ', Summary: ' + ${movie.getSummary()} +
-                           ', Rating: ' + ${movie.getRating()} +
+                           ', Rating: ' + ${#numbers.formatDecimal(movie.getRating(), 0, 'COMMA', 2, 'POINT')} +
                            ', Production: ' + ${movie.getProduction().getName()}" required><br>
 
             <a class="btn btn-primary" th:href="@{/movie/edit/{id}(id=${movie.getId()})}">Edit Movie</a>
+            <a class="btn btn-danger" th:href="@{/movie/delete/{id}(id=${movie.getId()})}">Delete Movie</a>
 
-            <button class="btn btn-danger" name="Delete Movie" th:attr="onclick='deleteMovie(\'' + ${movie.getId()} + '\')'">Delete Movie</button>
+
+            <!--            <button class="btn btn-danger" name="Delete Movie" th:attr="onclick='deleteMovie(\'' + ${movie.getId()} + '\')'">Delete Movie</button>-->
 
         </div>
 

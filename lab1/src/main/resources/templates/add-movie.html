@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Add Movie</title>
 </head>
 <body>
@@ -38,11 +40,11 @@
                placeholder="Quantity">
     </div>
     <div class="form-group">
-        <label>Category</label>
+        <label>Production</label>
         <select name="production" class="form-control">
             <option th:if="${movie} != null"
                     th:selected="${movie.getProduction() != null &&
-                                movie.getCategory().getId() == prod.getId()}"
+                                movie.getProduction().getId() == prod.getId()}"
                     th:each="prod : ${productions}"
                     th:value="${prod.getId()}"
                     th:text="${prod.getName()}">
@@ -54,8 +56,8 @@
             </option>
         </select>
     </div>
-    <button id="submit" type="submit" class="btn btn-primary">Submit</button>
-    <a type="button" class="btn btn-primary" href="/movies">Back</a>
+    <button id="submit" type="submit" class="btn btn-success">Submit</button>
+    <a type="button" class="btn btn-danger" href="/movies">Back</a>
 </form>
 
 </body>
