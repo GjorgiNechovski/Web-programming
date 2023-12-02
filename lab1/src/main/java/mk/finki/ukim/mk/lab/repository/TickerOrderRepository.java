@@ -1,31 +1,13 @@
 package mk.finki.ukim.mk.lab.repository;
 
 import mk.finki.ukim.mk.lab.model.TicketOrder;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class TickerOrderRepository {
-    List<TicketOrder> orders;
-
-    public TicketOrder order(String movieName, String clientName, String address, int tickets){
-        if(orders == null){
-            orders = new ArrayList<>();
-        }
-
-        TicketOrder order = new TicketOrder(orders.size() + 1, movieName, clientName, address, tickets);
-        orders.add(order);
-
-        return order;
-    }
-
-    public List<TicketOrder> getAllTickets(){
-         return orders;
-    }
-
-    public void delete(long id){
-        orders.removeIf(ticketOrder -> ticketOrder.getId() == id);
-    }
+public interface TickerOrderRepository extends JpaRepository<TicketOrder, Long> {
+    void deleteById(long id);
 }

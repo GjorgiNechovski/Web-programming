@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -29,23 +30,23 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> searchMovies(String text) {
-        return movieRepository.searchMovies(text);
+        return movieRepository.searchMoviesByTitleContainingIgnoreCaseOrSummaryContainingIgnoreCase(text, text);
     }
 
     @Override
     public List<Movie> searchMovies(String text, String rating) {
         if (text != null && rating !=null && !rating.isEmpty()) {
             double parsedRating = Double.parseDouble(rating);
-            return movieRepository.searchMoviesByTextAndRating(text, parsedRating);
+            return movieRepository.findByTitleContainingIgnoreCaseAndRatingGreaterThanEqual(text, parsedRating);
         }
 
         if (text != null) {
-            return movieRepository.searchMovies(text);
+            return movieRepository.searchMoviesByTitleContainingIgnoreCaseOrSummaryContainingIgnoreCase(text, text);
         }
 
         if (rating !=null && !rating.isEmpty()) {
             double parsedRating = Double.parseDouble(rating);
-            return movieRepository.searchMoviesByRating(parsedRating);
+            return movieRepository.findByRatingGreaterThanEqual(parsedRating);
         }
 
         return movieRepository.findAll();
@@ -58,12 +59,16 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public void editMovie(Long id, String title, String summary, float rating, Long productionId) throws MovieNotFound {
-        Movie movie = movieRepository.findById(id);
-        Production production = productionRepository.findById(productionId);
+        Optional<Movie> optionalMovie = movieRepository.findById(id);
+        Production production = productionRepository.findById(productionId).get();
 
-        if (movie==null){
+        if (optionalMovie.isEmpty()){
             throw new MovieNotFound();
         }
+
+
+
+        Movie movie = optionalMovie.get();
 
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         float formattedRating = Float.parseFloat(decimalFormat.format(rating));
@@ -73,19 +78,23 @@ public class MovieServiceImpl implements MovieService {
         movie.setRating(formattedRating);
         movie.setProduction(production);
 
-        movieRepository.set(movie);
+        movieRepository.save(movie);
     }
 
     @Override
     public void deleteMovie(Long id) {
-        movieRepository.delete(id);
+        movieRepository.deleteById(id);
     }
 
     @Override
     public void addMovie(String title, String summary, float rating, Long productionId) {
-        Production production = productionRepository.findById(productionId);
+        Production production = productionRepository.findById(productionId).get();
 
-        movieRepository.addMovie(title, summary, rating, production);
+        Movie movie = new Movie(title,summary,rating);
+
+        movie.setProduction(production);
+
+        movieRepository.save(movie);
     }
 
 

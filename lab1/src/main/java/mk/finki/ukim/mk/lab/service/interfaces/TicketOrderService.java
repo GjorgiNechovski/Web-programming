@@ -5,7 +5,7 @@ import mk.finki.ukim.mk.lab.model.TicketOrder;
 import java.util.List;
 
 public interface TicketOrderService{
-    TicketOrder placeOrder(String movieTitle, String clientName, String address, int numberOfTickets);
+    TicketOrder placeOrder(String movieTitle, String clientName, int numberOfTickets);
 
     List<TicketOrder> getAllTickets();
 

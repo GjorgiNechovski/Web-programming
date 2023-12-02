@@ -10,7 +10,7 @@
 
 <div th:each="ticket: ${tickets}">
     <p th:text="'Movie Name ' + ${ticket.getMovieTitle()} +
-     ', Client Name ' + ${ticket.getClientName()} +
+     ', Client Name ' + ${ticket.getUser().getName()} +
      ', Number of tickets: ' + ${ticket.getNumberOfTickets()}" ></p>
 
     <form th:action="@{/ticket/delete/{id}(id=${ticket.getId()})}" th:method="post">

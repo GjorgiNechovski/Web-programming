@@ -1,7 +1,9 @@
 package mk.finki.ukim.mk.lab.web.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
+import mk.finki.ukim.mk.lab.model.Movie;
 import mk.finki.ukim.mk.lab.model.TicketOrder;
+import mk.finki.ukim.mk.lab.service.implementation.MovieServiceImpl;
 import mk.finki.ukim.mk.lab.service.implementation.TickerOrderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +16,11 @@ import java.util.List;
 @Controller
 public class TickerOrderController {
     private final TickerOrderImpl tickerOrder;
+    private final MovieServiceImpl movieService;
 
-    public TickerOrderController(TickerOrderImpl tickerOrder) {
+    public TickerOrderController(TickerOrderImpl tickerOrder, MovieServiceImpl movieService) {
         this.tickerOrder = tickerOrder;
+        this.movieService = movieService;
     }
 
     @PostMapping("/ticketOrder")
@@ -33,8 +37,18 @@ public class TickerOrderController {
         model.addAttribute("clientName", clientName);
 
 
-        tickerOrder.placeOrder(movieName, clientName, address, numberOfTickets);
-        long totalTickets = tickerOrder.getClientsNumberOfTickets(clientName);
+        tickerOrder.placeOrder(movieName, clientName, numberOfTickets);
+        long totalTickets = 0;
+        try {
+            totalTickets = tickerOrder.getClientsNumberOfTickets(clientName);
+        }
+        catch (Exception e){
+            model.addAttribute("error", "The username doesn't exist!");
+
+            List<Movie> movies = movieService.listAll();
+            model.addAttribute("movies", movies);
+            return "listMovies";
+        }
         model.addAttribute("totalTickets", totalTickets);
 
         return "orderConfirmation";
