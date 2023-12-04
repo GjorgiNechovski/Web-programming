@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+</head>
+<body>
+<h1>User Cart for: <span th:text="${username}"></span></h1>
+
+<div th:if="${error != null}" th:text="${error}"></div>
+
+<div th:if="${cart != null}">
+    <h2>Shopping Cart Details</h2>
+
+    <p>Date Created: <span th:text="${#temporals.format(cart.dateCreated, 'dd-MM-yyyy HH:mm:ss')}"></span></p>
+
+    <h3>Cart Items:</h3>
+    <div th:each="order : ${cart.ticketOrders}">
+        <p>Movie Title: <span th:text="${order.movieTitle}"></span> Number of Tickets: <span th:text="${order.numberOfTickets}"></span></p>
+    </div>
+
+    <form th:action="@{/buyTickets}" th:method="post">
+        <input type="submit" class="btn btn-primary btn-block my-2" value="Buy Tickets!">
+        <input type="hidden" name="username" th:value="${username}">
+    </form>
+</div>
+</body>
+</html>

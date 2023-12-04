@@ -1,4 +1,4 @@
-package mk.finki.ukim.mk.lab.exceptions;
+package mk.finki.ukim.mk.lab.model.exceptions;
 
 public class MovieNotFound extends Exception{
     public MovieNotFound() {

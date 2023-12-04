@@ -2,6 +2,8 @@ package mk.finki.ukim.mk.lab.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import mk.finki.ukim.mk.lab.model.converters.UserFullName;
+import mk.finki.ukim.mk.lab.model.converters.UserFullNameConverter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -17,10 +19,8 @@ public class User {
 
     private String username;
 
-    @Column(name = "client_name")
-    private String name;
-
-    private String surname;
+    @Convert(converter = UserFullNameConverter.class)
+    private UserFullName fullName;
 
     @Column(name = "client_password")
     private String password;

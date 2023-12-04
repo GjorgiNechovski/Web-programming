@@ -1,6 +1,6 @@
 package mk.finki.ukim.mk.lab.service.interfaces;
 
-import mk.finki.ukim.mk.lab.exceptions.MovieNotFound;
+import mk.finki.ukim.mk.lab.model.exceptions.MovieNotFound;
 import mk.finki.ukim.mk.lab.model.Movie;
 
 import java.util.List;

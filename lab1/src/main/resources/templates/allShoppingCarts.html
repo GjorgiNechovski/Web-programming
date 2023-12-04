@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <form th:action="@{/all/carts}" th:method="get">
+        <label for="from">From:</label>
+        <input type="datetime-local" id="from" name="from">
+
+        <label for="to">To:</label>
+        <input type="datetime-local" id="to" name="to">
+
+        <input type="submit" value="Filter">
+    </form>
+
+    <div th:each="cart : ${carts}">
+        <p>Username of cart: <span th:text="${cart.getUser().getFullName()}"></span>
+            Date created: <span th:text="${#temporals.format(cart.dateCreated, 'dd-MM-yyyy HH:mm:ss')}"></span></p>
+    </div>
+
+</body>
+</html>

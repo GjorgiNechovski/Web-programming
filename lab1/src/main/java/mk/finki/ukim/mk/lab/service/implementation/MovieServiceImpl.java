@@ -1,12 +1,11 @@
 package mk.finki.ukim.mk.lab.service.implementation;
 
-import mk.finki.ukim.mk.lab.exceptions.MovieNotFound;
+import mk.finki.ukim.mk.lab.model.exceptions.MovieNotFound;
 import mk.finki.ukim.mk.lab.model.Movie;
 import mk.finki.ukim.mk.lab.model.Production;
 import mk.finki.ukim.mk.lab.repository.MovieRepository;
 import mk.finki.ukim.mk.lab.repository.ProductionRepository;
 import mk.finki.ukim.mk.lab.service.interfaces.MovieService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;

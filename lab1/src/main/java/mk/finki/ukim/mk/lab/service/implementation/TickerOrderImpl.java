@@ -1,5 +1,6 @@
 package mk.finki.ukim.mk.lab.service.implementation;
 
+import mk.finki.ukim.mk.lab.model.ShoppingCart;
 import mk.finki.ukim.mk.lab.model.TicketOrder;
 import mk.finki.ukim.mk.lab.model.User;
 import mk.finki.ukim.mk.lab.repository.TickerOrderRepository;
@@ -38,6 +39,16 @@ public class TickerOrderImpl implements TicketOrderService {
     @Override
     public void deleteTicket(long id) {
         tickerOrderRepository.deleteById(id);
+    }
+
+    @Override
+    public List<TicketOrder> placeOrderFromShoppingCart(String username) {
+        User user = userRepository.findByUsername(username);
+        ShoppingCart cart = user.getCarts().get(0);
+
+        tickerOrderRepository.saveAll(cart.getTicketOrders());
+
+        return cart.getTicketOrders();
     }
 
     public long getClientsNumberOfTickets(String clientName) {

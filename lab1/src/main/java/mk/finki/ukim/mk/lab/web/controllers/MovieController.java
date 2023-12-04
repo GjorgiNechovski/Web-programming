@@ -1,6 +1,6 @@
 package mk.finki.ukim.mk.lab.web.controllers;
 
-import mk.finki.ukim.mk.lab.exceptions.MovieNotFound;
+import mk.finki.ukim.mk.lab.model.exceptions.MovieNotFound;
 import mk.finki.ukim.mk.lab.model.Movie;
 import mk.finki.ukim.mk.lab.model.Production;
 import mk.finki.ukim.mk.lab.service.implementation.MovieServiceImpl;

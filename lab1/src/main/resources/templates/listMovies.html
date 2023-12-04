@@ -32,7 +32,7 @@
     <a class="btn btn-primary" href="movie/add">Add new movie</a>
     <a class="btn btn-primary" href="/allTickets">See all current tickets</a>
 
-    <form th:action="@{/ticketOrder}" th:method="post" id="ticket">
+    <form th:action="@{/addToCart}" th:method="post" id="ticket">
         <div>
             <h2>Insert your Username</h2>
             <input type="text" name="clientName" id="clientName" required>
@@ -60,6 +60,16 @@
         <br/>
         <input type="submit" value="Submit" form="ticket">
     </form>
+
+    <div style="position: fixed; top: 50px; right: 20px; width: 200px;">
+        <form th:action="@{/showCart}" th:method="get" id="showCartForm">
+            Username:
+            <input type="text" name="username">
+            <input type="submit" class="btn btn-success btn-block my-2" value="Show Cart">
+        </form>
+        <hr>
+        <a class="btn btn-primary" href="all/carts">See all shopping carts</a>
+    </div>
 
 </main>
 </body>

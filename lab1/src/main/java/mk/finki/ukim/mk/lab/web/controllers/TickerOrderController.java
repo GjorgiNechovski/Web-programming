@@ -3,6 +3,8 @@ package mk.finki.ukim.mk.lab.web.controllers;
 import jakarta.servlet.http.HttpServletRequest;
 import mk.finki.ukim.mk.lab.model.Movie;
 import mk.finki.ukim.mk.lab.model.TicketOrder;
+import mk.finki.ukim.mk.lab.model.User;
+import mk.finki.ukim.mk.lab.repository.UserRepository;
 import mk.finki.ukim.mk.lab.service.implementation.MovieServiceImpl;
 import mk.finki.ukim.mk.lab.service.implementation.TickerOrderImpl;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -67,5 +70,14 @@ public class TickerOrderController {
         tickerOrder.deleteTicket(id);
 
         return "redirect:/allTickets";
+    }
+
+    @PostMapping("buyTickets")
+    public String buyTicketsFromCart(@RequestParam String username, Model model){
+        List<TicketOrder> tickets = tickerOrder.placeOrderFromShoppingCart(username);
+
+        model.addAttribute("tickets", tickets);
+
+        return "ticket-orders";
     }
 }
