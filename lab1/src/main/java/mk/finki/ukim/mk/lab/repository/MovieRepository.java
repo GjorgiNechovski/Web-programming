@@ -13,4 +13,6 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     List<Movie> findByRatingGreaterThanEqual(double rating);
     List<Movie> findByTitleContainingIgnoreCaseAndRatingGreaterThanEqual(String title, double rating);
     void deleteById(long id);
+
+    Movie findByTitle(String title);
 }

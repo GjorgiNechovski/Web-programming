@@ -60,6 +60,19 @@ public class TickerOrderController {
     public String getAllTickerOrders(Model model){
         List<TicketOrder> ticketOrders = tickerOrder.getAllTickets();
 
+        double price = 0;
+
+        for (TicketOrder order : tickerOrder.getAllTickets()){
+            Movie movie = movieService.findMovieByTitle(order.getMovieTitle());
+
+            System.out.println(movie);
+            System.out.println(price);
+
+            price+= movie.getMoviePrice();
+        }
+
+        model.addAttribute("ticketPrice", price);
+
         model.addAttribute("tickets", ticketOrders);
 
         return "ticket-orders";
@@ -77,6 +90,16 @@ public class TickerOrderController {
         List<TicketOrder> tickets = tickerOrder.placeOrderFromShoppingCart(username);
 
         model.addAttribute("tickets", tickets);
+
+        double price = 0;
+
+        for (TicketOrder order : tickerOrder.getAllTickets()){
+            Movie movie = movieService.findMovieByTitle(order.getMovieTitle());
+
+            price+= order.getNumberOfTickets() * movie.getMoviePrice();
+        }
+
+        model.addAttribute("ticketPrice", price);
 
         return "ticket-orders";
     }

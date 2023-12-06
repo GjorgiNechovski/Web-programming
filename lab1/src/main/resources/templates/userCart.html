@@ -16,13 +16,23 @@
 
     <h3>Cart Items:</h3>
     <div th:each="order : ${cart.ticketOrders}">
-        <p>Movie Title: <span th:text="${order.movieTitle}"></span> Number of Tickets: <span th:text="${order.numberOfTickets}"></span></p>
+        <p>Movie Title: <span th:text="${order.movieTitle}"></span>
+            Number of Tickets: <span th:text="${order.numberOfTickets}"></span>
+        </p>
     </div>
 
     <form th:action="@{/buyTickets}" th:method="post">
         <input type="submit" class="btn btn-primary btn-block my-2" value="Buy Tickets!">
         <input type="hidden" name="username" th:value="${username}">
     </form>
-</div>
+
+    <div style="position: fixed; top: 50px; right: 20px; width: 200px;">
+        <form th:action="@{/changeCartDate}" th:method="post">
+            <input type="datetime-local" name="newDate">
+            <input type="hidden" name="username" th:value="${username}">
+            <input type="submit" value="Change Shopping Cart's Date">
+        </form>
+    </div>
+    </div>
 </body>
 </html>

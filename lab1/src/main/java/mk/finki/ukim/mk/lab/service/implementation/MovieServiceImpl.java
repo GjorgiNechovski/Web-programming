@@ -96,5 +96,8 @@ public class MovieServiceImpl implements MovieService {
         movieRepository.save(movie);
     }
 
-
+    @Override
+    public Movie findMovieByTitle(String title) {
+        return this.movieRepository.findByTitle(title);
+    }
 }

@@ -10,13 +10,15 @@
 
 <div th:each="ticket: ${tickets}">
     <p th:text="'Movie Name ' + ${ticket.getMovieTitle()} +
-     ', Client Name ' + ${ticket.getUser().getName()} +
+     ', Client Name ' + ${ticket.getUser().getFullName()} +
      ', Number of tickets: ' + ${ticket.getNumberOfTickets()}" ></p>
 
-    <form th:action="@{/ticket/delete/{id}(id=${ticket.getId()})}" th:method="post">
-        <input class="btn btn-danger" type="submit" value="Delete Ticket">
-    </form>
+<!--    <form th:action="@{/ticket/delete/{id}(id=${ticket.getId()})}" th:method="post">-->
+<!--        <input class="btn btn-danger" type="submit" value="Delete Ticket">-->
+<!--    </form>-->
 </div>
+
+<p th:text="'Total Price of the tickets is: ' + ${ticketPrice}"></p>
 
 </body>
 </html>

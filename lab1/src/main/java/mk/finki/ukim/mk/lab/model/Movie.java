@@ -20,12 +20,28 @@ public class Movie {
     @JoinColumn(name = "production_id")
     private Production production;
 
+    @ManyToOne
+    private MoviePrice price;
+
     public Movie(String title, String summary, double rating) {
         this.title = title;
         this.summary = summary;
         this.rating = rating;
+        this.price.setPrice(0);
+        this.price.setDiscount(0);
     }
 
+    public Movie(String title, String summary, double rating, Production production, MoviePrice price) {
+        this.title = title;
+        this.summary = summary;
+        this.rating = rating;
+        this.production = production;
+        this.price = price;
+    }
+
+    public double getMoviePrice(){
+        return this.price.getPrice() * this.price.getDiscount();
+    }
 
     public Movie() {
 

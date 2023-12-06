@@ -1,0 +1,4 @@
+INSERT INTO production (production_name, country, address) VALUES ('Production 1', 'Country A', 'Address 1'), ('Production 2', 'Country B', 'Address 2'), ('Production 3', 'Country C', 'Address 3');
+INSERT INTO movie_price (discount, price) VALUES (0.5, 100), (150, 0.1), (0.2, 120);
+INSERT INTO movie (title, summary, rating, production_id, price_id) VALUES ('Movie 1', 'Summary 1', 7.5, 1, 1), ('Movie 2', 'Summary 2', 8.0, 2, 2), ('Movie 3', 'Summary 3', 6.9, 3, 3);
+INSERT INTO customer (username, full_name, client_password, date_of_birth) VALUES ('user1', 'John, Doe', 'pass1', '1990-01-01'), ('user2', 'Alice, Smith', 'pass2', '1985-03-15'), ('user3', 'Bob, Johnson', 'pass3', '1995-07-20');

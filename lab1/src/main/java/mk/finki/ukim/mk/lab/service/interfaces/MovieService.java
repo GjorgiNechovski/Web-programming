@@ -13,5 +13,6 @@ public interface MovieService {
     void editMovie(Long movieId, String title, String summary, float rating, Long productionId) throws MovieNotFound;
     void deleteMovie(Long id);
     void addMovie(String title, String summary, float rating, Long productionId);
+    Movie findMovieByTitle(String title);
 }
 
